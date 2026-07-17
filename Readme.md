@@ -1,4 +1,4 @@
-# 📊 Olist E-Commerce Analytics Dashboard
+# 🤖 AI-Powered Sales Intelligence & Forecasting Platform
 
 An interactive Business Intelligence dashboard built using **Python, SQL, SQLite and Streamlit** to analyze the Brazilian Olist e-commerce marketplace.
 

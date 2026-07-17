@@ -171,3 +171,7 @@ Dashboard screenshots are available inside the **images/** folder.
 
 GitHub:
 https://github.com/saniachhillar
+
+## Live Demo
+
+https://<your-streamlit-app>.streamlit.app

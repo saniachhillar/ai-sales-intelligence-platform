@@ -2,6 +2,7 @@ import sqlite3
 import pandas as pd
 import os
 import streamlit as st
+from huggingface_hub import hf_hub_download
 
 # ----------------------------------------------------
 # Database Path
@@ -11,12 +12,34 @@ BASE_DIR = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..")
 )
 
-DB_PATH = os.path.join(
+DATA_DIR = os.path.join(
     BASE_DIR,
     "data",
-    "processed",
+    "processed"
+)
+
+os.makedirs(DATA_DIR, exist_ok=True)
+
+DB_PATH = os.path.join(
+    DATA_DIR,
     "olist.db"
 )
+
+# ----------------------------------------------------
+# Download Database from Hugging Face
+# ----------------------------------------------------
+
+@st.cache_resource
+def download_database():
+
+    if not os.path.exists(DB_PATH):
+
+        hf_hub_download(
+            repo_id="sania-chhillar/olist-ecommerce-data",
+            filename="olist.db",
+            repo_type="dataset",
+            local_dir=DATA_DIR
+        )
 
 # ----------------------------------------------------
 # Database Connection
@@ -24,6 +47,8 @@ DB_PATH = os.path.join(
 
 @st.cache_resource
 def get_connection():
+
+    download_database()
 
     return sqlite3.connect(
         DB_PATH,
@@ -50,7 +75,7 @@ def get_filter_values():
 
     years = run_query("""
     SELECT DISTINCT
-    strftime('%Y',order_purchase_timestamp) Year
+    strftime('%Y', order_purchase_timestamp) AS Year
     FROM orders
     ORDER BY Year
     """)
@@ -81,27 +106,27 @@ def build_where_clause(
     payment="All"
 ):
 
-    conditions=[]
+    conditions = []
 
-    if year!="All":
-
-        conditions.append(
-            f"strftime('%Y',orders.order_purchase_timestamp)='{year}'"
-        )
-
-    if state!="All":
+    if year != "All":
 
         conditions.append(
-            f"customers.customer_state='{state}'"
+            f"strftime('%Y', orders.order_purchase_timestamp) = '{year}'"
         )
 
-    if payment!="All":
+    if state != "All":
 
         conditions.append(
-            f"payments.payment_type='{payment}'"
+            f"customers.customer_state = '{state}'"
         )
 
-    if len(conditions)==0:
+    if payment != "All":
+
+        conditions.append(
+            f"payments.payment_type = '{payment}'"
+        )
+
+    if len(conditions) == 0:
 
         return ""
 

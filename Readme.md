@@ -169,7 +169,7 @@ Dashboard screenshots are available inside the **images/** folder.
 
 ## 🙋‍♀️ Author
 
-**Sania Chhillar**
+**Sania**
 
 🎓 B.Tech (ECE-AI), Indira Gandhi Delhi Technical University for Women
 

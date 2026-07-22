@@ -175,7 +175,7 @@ Dashboard screenshots are available inside the **images/** folder.
 
 🔗 **GitHub:** [github.com/saniachhillar](https://github.com/saniachhillar)
 
-💼 **LinkedIn:** [linkedin.com/in/sania-chhillar](https://www.linkedin.com/in/sania-chhillar/) *(replace with your exact LinkedIn URL if different)*
+💼 **LinkedIn:** [linkedin.com/in/sania-chhillar](https://www.linkedin.com/in/sania-chhillar-40256a2a7/)
 
 ---
 
